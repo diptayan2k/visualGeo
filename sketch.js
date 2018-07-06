@@ -67,23 +67,42 @@ function volcanospts(){
   translate(width/2, height/2);
   imageMode(CENTER);
   image(mapimg,0,0);
-  
+
   var cx = markX(0);
   var cy = markY(0);
-
+ 
   for(var i=0; i<volcanos.features.length; i++)
   {
 	lat= volcanos.features[i].properties.Latitude;
 	lon= volcanos.features[i].properties.Longitude;
-
 	var x = markX(lon) - cx;
 	var y = markY(lat) - cy;
+	var activity = volcanos.features[i].properties.risk;
+	if(activity=="NULL"){
+		noStroke();
+		fill(255, 246, 0,150);
+		triangle(x-3,y,x,y-6,x+3,y);
+	}
 
-	stroke(130,50,50);
-	strokeWeight(.5);
-	fill (230,10,50,200);
-	triangle(x-3,y,x,y-6,x+3,y);
-  }
+	else if(activity=="1"){
+		noStroke();
+		fill(255, 119, 0,200)
+		triangle(x-3,y,x,y-6,x+3,y);
+
+	}
+	else if(activity=="2"){
+		noStroke();
+		fill(221, 101, 15,200);
+		triangle(x-3,y,x,y-6,x+3,y);
+
+	}
+	else{
+		noStroke();
+		fill(255, 0, 0);
+		triangle(x-5,y,x,y-10,x+5,y);
+	}
+  
+ }
 
 }
 
